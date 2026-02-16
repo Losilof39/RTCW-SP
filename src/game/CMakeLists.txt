@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(qagamex86 LANGUAGES C)
+project(qagamex86)
 
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 11)
+#set(CMAKE_C_STANDARD_REQUIRED ON)
+#set(CMAKE_C_EXTENSIONS OFF)
 
 set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ai_cast.c
@@ -61,6 +61,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/q_shared.c)
 
 add_library(qagamex86 SHARED ${SOURCES})
+
+target_link_libraries(qagamex86 PRIVATE winmm)
 
 target_include_directories(qagamex86 PUBLIC 
                             ${CMAKE_CURRENT_SOURCE_DIR}
