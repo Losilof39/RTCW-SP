@@ -50,6 +50,10 @@ if(MSVC)
     )
 endif()
 
+set_target_properties(cgamex86 PROPERTIES
+    WINDOWS_EXPORT_ALL_SYMBOLS TRUE
+)
+
 add_compile_definitions(WIN32 _WINDOWS CGAMEDLL _CRT_SECURE_NO_WARNINGS)
 
 target_link_libraries(cgamex86 PRIVATE odbc32 odbccp32)

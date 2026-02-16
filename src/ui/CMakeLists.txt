@@ -28,6 +28,10 @@ if(MSVC)
     )
 endif()
 
+set_target_properties(uix86 PROPERTIES
+    WINDOWS_EXPORT_ALL_SYMBOLS TRUE
+)
+
 target_include_directories(uix86 PUBLIC 
                             ${CMAKE_CURRENT_SOURCE_DIR}
                             ${CMAKE_CURRENT_SOURCE_DIR}/../game

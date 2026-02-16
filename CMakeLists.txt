@@ -62,8 +62,28 @@ set(SOURCES
 add_subdirectory(src/renderer)
 add_subdirectory(src/botlib)
 add_subdirectory(src/splines)
+add_subdirectory(src/ui)
+add_subdirectory(src/cgame)
+add_subdirectory(src/game)
 
 add_executable(wolf ${SOURCES})
+
+add_dependencies(wolf qagamex86 cgamex86 uix86)
+
+if(WIN32)
+    add_custom_command(TARGET wolf POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:qagamex86>
+            $<TARGET_FILE:cgamex86>
+            $<TARGET_FILE:uix86>
+            $<TARGET_FILE_DIR:wolf>
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_RUNTIME_DLLS:wolf>
+            $<TARGET_FILE_DIR:wolf>
+        COMMENT "Copying DLLs to exe directory"
+        VERBATIM
+    )
+endif()
 
 set_target_properties(wolf PROPERTIES
     WIN32_EXECUTABLE TRUE
